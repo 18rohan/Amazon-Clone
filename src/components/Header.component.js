@@ -5,14 +5,14 @@ import styled from "styled-components";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsSearch } from "react-icons/bs";
 import { BiCart } from "react-icons/bi";
-import {GiHamburgerMenu} from 'react-icons/gi';
+import { GiHamburgerMenu } from "react-icons/gi";
 const Header = () => {
   return (
     <ParentContainer>
-    <Container>
-      <Left>
-        <Logo>
-          <img src="images/amazon-dark.png" alt="Amazon Logo" />
+      <Container>
+        <Left>
+          <Logo>
+            <img src="images/amazon-dark.png" alt="Amazon Logo" />
           </Logo>
           <SelectAddress>
             <HiOutlineLocationMarker color="white" size={24} />
@@ -21,97 +21,94 @@ const Header = () => {
               <span>Select your address</span>
             </p>
           </SelectAddress>
-
-
-      </Left>
-      <SearchBar>
-        <CategoryButton>All ▾</CategoryButton>
-        <InputField />
-        <SearchButton>
-          <BsSearch size={18} />
-        </SearchButton>
-      </SearchBar>
-      <Right>
-        <Icon>
-          <img src="images/india-flag.png" alt="flag" /> <p>▾</p>
-        </Icon>
-        <SigninContainer>
-          <p>
-            <span>Hello Signin </span>
-            Accounts & Lists ▾
-          </p>
-        </SigninContainer>
-        <Returns>
-          <p>
-            <span>Returns </span>& Orders
-          </p>
-        </Returns>
-        <Cart>
-          <BiCart size={35} color="white" />
-          <p>cart</p>
-        </Cart>
-      </Right>
-    </Container>
-    <Menu>
-      <MenuItem>
-        <GiHamburgerMenu color="white" size={16} />
-        <p>All</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Mobiles</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Best Seller</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Fashion</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Electronics</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Customer Service</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Amazon Pay</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Prime ▾</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Today's Deal</p>
-      </MenuItem>
-      <MenuItem>
-        <p>New Releases</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Computers</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Home & Kitchen</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Books</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Toys and Games</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Coupon</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Sell</p>
-      </MenuItem>
-    </Menu>
+        </Left>
+        <SearchBar>
+          <CategoryButton>All ▾</CategoryButton>
+          <InputField />
+          <SearchButton>
+            <BsSearch size={18} />
+          </SearchButton>
+        </SearchBar>
+        <Right>
+          <Icon>
+            <img src="images/india-flag.png" alt="flag" /> <p>▾</p>
+          </Icon>
+          <SigninContainer>
+            <p>
+              <span>Hello Signin </span>
+              Accounts & Lists ▾
+            </p>
+          </SigninContainer>
+          <Returns>
+            <p>
+              <span>Returns </span>& Orders
+            </p>
+          </Returns>
+          <Cart>
+            <BiCart size={35} color="white" />
+            <p>cart</p>
+          </Cart>
+        </Right>
+      </Container>
+      <Menu>
+        <MenuItem>
+          <GiHamburgerMenu color="white" size={16} />
+          <p>All</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Mobiles</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Best Seller</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Fashion</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Electronics</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Customer Service</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Amazon Pay</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Prime ▾</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Today's Deal</p>
+        </MenuItem>
+        <MenuItem>
+          <p>New Releases</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Computers</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Home & Kitchen</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Books</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Toys and Games</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Coupon</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Sell</p>
+        </MenuItem>
+      </Menu>
     </ParentContainer>
   );
 };
 
 const ParentContainer = styled.div`
-  display:flex;
-  flex-direction:  column;
-
-`
+  display: flex;
+  flex-direction: column;
+`;
 const Container = styled.div`
   background-color: #131921;
   display: flex;
@@ -126,38 +123,37 @@ const Menu = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding-top:10px;
+  padding-top: 10px;
   padding-bottom: 10px;
-
-`
+`;
 const MenuItem = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: row;
-  margin-top:4px;
-  margin-bottom:4px;
-  padding:3px;
-  padding-top:3px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 3px;
+  padding-top: 3px;
   padding-bottom: 3px;
-  margin-top:4px;
-  margin-bottom:4px;
-  margin-left:4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 4px;
   margin-right: 4px;
-  border:1px solid transparent;
+  border: 1px solid transparent;
   p {
-    color:white;
-    font-size:14px;
-    padding-left:5px;
+    color: white;
+    font-size: 14px;
+    padding-left: 5px;
   }
   &:hover {
-    border:1px solid white;
+    border: 1px solid white;
   }
-`
+`;
 const Left = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding-top:8px;
+  padding-top: 8px;
   padding-right: 2px;
   margin-left: 8px;
   width: 40%;
@@ -191,7 +187,7 @@ const Logo = styled.div`
   justify-content: flex-start;
   width: 55%;
   flex-wrap: wrap;
-  margin-left:6px;
+  margin-left: 6px;
   padding-top: 8px;
   padding-bottom: 4px;
   margin-top: 8px;
@@ -208,7 +204,7 @@ const SelectAddress = styled.div`
   width: 80%;
   padding-left: 28px;
   padding-right: 25px;
-  padding-bottom:4px;
+  padding-bottom: 4px;
   p {
     color: white;
     font-size: 14px;
