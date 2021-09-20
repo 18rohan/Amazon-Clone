@@ -13,6 +13,7 @@ const Header = () => {
       <Left>
         <Logo>
           <img src="images/amazon-dark.png" alt="Amazon Logo" />
+          </Logo>
           <SelectAddress>
             <HiOutlineLocationMarker color="white" size={24} />
             <p>
@@ -20,15 +21,16 @@ const Header = () => {
               <span>Select your address</span>
             </p>
           </SelectAddress>
-        </Logo>
-        <SearchBar>
-          <CategoryButton>All ▾</CategoryButton>
-          <InputField />
-          <SearchButton>
-            <BsSearch size={18} />
-          </SearchButton>
-        </SearchBar>
+
+
       </Left>
+      <SearchBar>
+        <CategoryButton>All ▾</CategoryButton>
+        <InputField />
+        <SearchButton>
+          <BsSearch size={18} />
+        </SearchButton>
+      </SearchBar>
       <Right>
         <Icon>
           <img src="images/india-flag.png" alt="flag" /> <p>▾</p>
@@ -155,11 +157,13 @@ const Left = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  width: 100%;
+  padding-top:8px;
+  padding-right: 2px;
+  margin-left: 8px;
+  width: 40%;
 `;
 const Right = styled.div`
-  width: 50%;
+  width: 55%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -187,27 +191,29 @@ const Logo = styled.div`
   justify-content: flex-start;
   width: 55%;
   flex-wrap: wrap;
-  padding-left: 10px;
-  padding: 10px;
+  margin-left:6px;
+  padding-top: 8px;
+  padding-bottom: 4px;
   margin-top: 8px;
   img {
-    width: 27%;
+    width: 100px;
   }
 `;
 
 const SelectAddress = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  width: 60%;
+  width: 80%;
   padding-left: 28px;
-  padding-bottom:10px;
+  padding-right: 25px;
+  padding-bottom:4px;
   p {
     color: white;
     font-size: 14px;
     padding-left: 7x;
-    font-weight: bold;
+    font-weight: 400;
   }
   p span {
     display: block;
@@ -238,7 +244,7 @@ const SearchBar = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 90%;
+  width: 80%;
   height: 40px;
   background-color: white;
   border-radius: 3px;
