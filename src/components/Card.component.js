@@ -20,7 +20,7 @@ const Card = (props) => {
 const Container = styled.div`
   background-color: white;
   width: 340px;
-  height: 400px;
+  height: 410px;
   margin-left: 18px;
   margin-right: 8px;
   z-index: 88;

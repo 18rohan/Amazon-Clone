@@ -27,7 +27,19 @@ const HomeCarousel = (props) => {
         {/* <p className="legend">Legend 2</p> */}
       </Slider>
       <Slider>
+        <img src="images/asset9.jpeg" alt="third" />
+        {/* <p className="legend">Legend 3</p> */}
+      </Slider>
+      <Slider>
+        <img src="images/asset8.jpeg" alt="third" />
+        {/* <p className="legend">Legend 3</p> */}
+      </Slider>
+      <Slider>
         <img src="images/asset3.jpeg" alt="third" />
+        {/* <p className="legend">Legend 3</p> */}
+      </Slider>
+      <Slider>
+        <img src="images/asset7.jpeg" alt="third" />
         {/* <p className="legend">Legend 3</p> */}
       </Slider>
     </Carousel>

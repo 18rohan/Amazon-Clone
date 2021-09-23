@@ -1,18 +1,17 @@
-
-
 body {
   overflow-y: scroll;
   overflow-x: hidden;
-  margin:0px;
+  margin: 0px;
 }
 
 :root,
 body {
   font-family: Arial, sans-serif;
-  background-color: #EEEEEE;
-  },
+  background-color: #eeeeee;
+}
+,
 html {
-  background-color: white;
+  background-color: #eeeeee;
   box-sizing: border-box;
 }
 

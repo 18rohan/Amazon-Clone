@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 // Import Icons
@@ -6,14 +6,30 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsSearch } from "react-icons/bs";
 import { BiCart } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+// Import packages
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signoutAPI } from "../store/actions/UserActions.js";
+import { setCartNumber } from "../store/actions/CartActions.js";
+import { PRODUCTS } from "../Data/data.js";
+
 const Header = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.CurrentUser);
+  const BasketNumber = useSelector((state) => state.cart.cartNumber);
+  useEffect(() => {
+    dispatch(setCartNumber(PRODUCTS.length));
+  });
   return (
     <ParentContainer>
       <Container>
         <Left>
-          <Logo>
-            <img src="images/amazon-dark.png" alt="Amazon Logo" />
-          </Logo>
+          <Link to="/">
+            <Logo>
+              <img src="images/amazon-dark.png" alt="Amazon Logo" />
+            </Logo>
+          </Link>
           <SelectAddress>
             <HiOutlineLocationMarker color="white" size={24} />
             <p>
@@ -33,21 +49,107 @@ const Header = () => {
           <Icon>
             <img src="images/india-flag.png" alt="flag" /> <p>▾</p>
           </Icon>
+
           <SigninContainer>
-            <p>
-              <span>Hello Signin </span>
-              Accounts & Lists ▾
-            </p>
+            <Link to="/signin">
+              <p>
+                <span>
+                  Hello,{" "}
+                  {currentUser ? (
+                    currentUser.displayName.split(" ")[0]
+                  ) : (
+                    <span>Welcome back</span>
+                  )}{" "}
+                </span>
+                Accounts & Lists ▾
+              </p>
+            </Link>
+            <Dropdown>
+              <HoverComponent>
+                {currentUser ? (
+                  <LogoutButton
+                    onClick={() => {
+                      dispatch(signoutAPI());
+                    }}
+                  >
+                    Sign Out
+                  </LogoutButton>
+                ) : (
+                  <Link to="/signin">
+                    <SigninButton>
+                      <p
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                          fontWeight: "400",
+                        }}
+                      >
+                        Sign In
+                      </p>
+                    </SigninButton>
+                  </Link>
+                )}
+
+                <RowContainer>
+                  <Options>
+                    <p>Your List</p>
+                    <Item>
+                      <p>Create a Wishlist</p>
+                    </Item>
+                    <Item>
+                      <p>Wish from any website</p>
+                    </Item>
+                    <Item>
+                      <p>Baby Wish List</p>
+                    </Item>
+                    <Item>
+                      <p>Discover your style</p>
+                    </Item>
+                    <Item>
+                      <p>Explore Showroom</p>
+                    </Item>
+                  </Options>
+                  <Options
+                    style={{
+                      borderLeft: "1px solid grey",
+                      paddingLeft: "15px;",
+                    }}
+                  >
+                    <p>Account</p>
+                    <Item>
+                      <p>Your Account</p>
+                    </Item>
+                    <Item>
+                      <p>Your Orders</p>
+                    </Item>
+                    <Item>
+                      <p>Your Wishlist</p>
+                    </Item>
+                    <Item>
+                      <p>Your Reccomendations</p>
+                    </Item>
+                    <Item>
+                      <p>Your Saved Items</p>
+                    </Item>
+                  </Options>
+                </RowContainer>
+              </HoverComponent>
+            </Dropdown>
           </SigninContainer>
+
           <Returns>
             <p>
               <span>Returns </span>& Orders
             </p>
           </Returns>
-          <Cart>
-            <BiCart size={35} color="white" />
-            <p>cart</p>
-          </Cart>
+          <Link to="/cart">
+            <Cart>
+              <CartCount>
+                <p>{BasketNumber}</p>
+              </CartCount>
+              <BiCart size={35} color="white" />
+            </Cart>
+          </Link>
         </Right>
       </Container>
       <Menu>
@@ -126,23 +228,61 @@ const Menu = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
 `;
+
+const LogoutButton = styled.button`
+  width: 70%;
+  background-color: #f0c14b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  p {
+    padding-bottom: 4px;
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 400;
+  }
+`;
+
+const SigninButton = styled.a`
+  width: 200px;
+  background-color: #f0c14b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  text-decoration: none;
+  p {
+    padding-bottom: 4px;
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 400;
+  }
+`;
+
 const MenuItem = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 4px;
-  margin-bottom: 4px;
-  padding: 3px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  margin-left: 4px;
+  margin-bottom: 6px;
+  margin-left: 6px;
   margin-right: 4px;
   border: 1px solid transparent;
   p {
     color: white;
     font-size: 14px;
-    padding-left: 5px;
+    padding: 4px;
   }
   &:hover {
     border: 1px solid white;
@@ -215,6 +355,25 @@ const SelectAddress = styled.div`
     display: block;
   }
 `;
+
+const HoverComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding-left: 8px;
+  padding-right: 8px;
+  z-index: 999;
+  width: 370px;
+  height: 320px;
+  position: absolute;
+  top: 55px;
+  right: 170px;
+`;
+
+const Dropdown = styled.div`
+  display: none;
+`;
 const SigninContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -226,12 +385,17 @@ const SigninContainer = styled.div`
     font-size: 14px;
     padding-left: 7x;
     font-weight: bold;
+    text-decoration: none;
   }
   p > span {
     color: white;
     font-weight: 400;
-    font-size: 14px;
-    padding-right: 55px;
+    font-size: 12px;
+    padding-right: 62px;
+  }
+
+  &:hover ${Dropdown} {
+    display: block;
   }
 `;
 
@@ -281,26 +445,65 @@ const Returns = styled.div`
 
   p {
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
   }
   p > span {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
   }
 `;
 
 const Cart = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 2px;
   margin-right: 8px;
   p {
     color: white;
-    padding-top: 10px;
+    padding-top: 2px;
+    line-height: 3px;
   }
+`;
+
+const Options = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-left: 8px;
+  width: 100%;
+  p {
+    text-align: left;
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: bold;
+  }
+`;
+
+const Item = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  padding-top: 7px;
+  p {
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 400;
+    font-size: 13px;
+  }
+`;
+
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 100%;
+`;
+
+const CartCount = styled.div`
+  display: block;
 `;
 
 export default Header;
