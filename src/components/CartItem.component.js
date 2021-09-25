@@ -35,7 +35,7 @@ const CartItem = (props) => {
           </p>
         </InfoRow>
         <LastRow>
-          <QuantityButton>Qty: {props.quantity} ▾</QuantityButton>
+          <QuantityButton>Qty: {props.quantity} </QuantityButton>
           <Icon>
             <p>Delete</p>
           </Icon>
@@ -66,8 +66,7 @@ const ImageContainer = styled.div`
   width: 25%;
   padding-right: 15px;
   img {
-    width: 200px;
-    height: 180px;
+    width: 100%;
   }
 `;
 

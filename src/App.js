@@ -8,6 +8,7 @@ import Header from "./components/Header.component";
 import Home from "./components/Home.page";
 import Cart from "./components/Cart.page";
 import SigninPage from "./components/Signin.page";
+import ProductsPage from "./components/Products.page";
 
 const App = () => {
   return (
@@ -25,6 +26,10 @@ const App = () => {
           </Route>
           <Route exact path="/signin">
             <SigninPage />
+          </Route>
+          <Route exact path="/products">
+            <Header />
+            <ProductsPage />
           </Route>
         </Switch>
       </Router>

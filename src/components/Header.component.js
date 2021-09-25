@@ -11,16 +11,41 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutAPI } from "../store/actions/UserActions.js";
-import { setCartNumber } from "../store/actions/CartActions.js";
+import { AddToCart } from "../store/actions/CartActions.js";
 import { PRODUCTS } from "../Data/data.js";
 
 const Header = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.CurrentUser);
-  const BasketNumber = useSelector((state) => state.cart.cartNumber);
-  useEffect(() => {
-    dispatch(setCartNumber(PRODUCTS.length));
+  // const AllCartItems = useSelector((state) => {
+  //   const transformedCartItems = [];
+  //   for (var key in state.cart.cartItems) {
+  //     transformedCartItems.push({
+  //       key: key,
+  //       heading: state.cart.cartItems[key].heading,
+  //       price: state.cart.cartItems[key].price,
+  //       quantity: state.cart.cartItems[key].quantity,
+  //       sum: state.cart.cartItems[key].sum,
+  //       image: state.cart.cartItems[key].image,
+  //       // InstockStatus: state.cart.cartItems.InstockStatus,
+  //       shippingStatus: state.cart.cartItems.shippingStatus,
+  //       // amazonfullfilled: state.cart.cartItems.amazonfullfilled,
+  //     });
+  //   }
+  //
+  //   return transformedCartItems;
+  // });
+  const AllCartItems = useSelector((state) => state.cart.cartItems);
+  var CartNumber = 0;
+  AllCartItems.map((item) => {
+    CartNumber += item.quantity;
   });
+  console.log("ALL CART ITEMS: ", AllCartItems);
+  // const BasketNumber = AllCartItems.length;
+  const BasketNumber = CartNumber;
+  // useEffect(() => {
+  //   dispatch(AddToCart(BasketNumber));
+  // });
   return (
     <ParentContainer>
       <Container>
@@ -155,8 +180,11 @@ const Header = () => {
       <Menu>
         <MenuItem>
           <GiHamburgerMenu color="white" size={16} />
-          <p>All</p>
+          <Link to="/products">
+            <p>All</p>
+          </Link>
         </MenuItem>
+
         <MenuItem>
           <p>Mobiles</p>
         </MenuItem>

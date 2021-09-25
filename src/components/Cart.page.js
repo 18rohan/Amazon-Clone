@@ -6,35 +6,63 @@ import MainFeed from "./main.component";
 import CartItem from "./CartItem.component";
 import SigninCard from "./SigninCard.component";
 import { PRODUCTS } from "../Data/data.js";
-import { useDispatch } from "react-redux";
-import { setCartNumber } from "../store/actions/CartActions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { AddToCart } from "../store/actions/CartActions.js";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
-  console.log("CART: ", PRODUCTS);
-  const CartList = PRODUCTS.map((item) => (
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const CartItems = useSelector((state) => state.cart.cartItems);
+
+  var CartNumber = 0;
+  CartItems.map((item) => {
+    CartNumber += item.quantity;
+  });
+  const AllCartItems = useSelector((state) => {
+    const transformedCartItems = [];
+    for (var key in state.cart.cartItems) {
+      transformedCartItems.push({
+        key: key,
+        heading: state.cart.cartItems[key].heading,
+        price: state.cart.cartItems[key].price,
+        quantity: state.cart.cartItems[key].quantity,
+        sum: state.cart.cartItems[key].sum,
+        image: state.cart.cartItems[key].image,
+        // InstockStatus: state.cart.cartItems.InstockStatus,
+        shippingStatus: state.cart.cartItems.shippingStatus,
+        // amazonfullfilled: state.cart.cartItems.amazonfullfilled,
+      });
+    }
+
+    return transformedCartItems;
+  });
+  const CartList = AllCartItems.map((item) => (
     <CartItem
-      image={item.image}
       heading={item.heading}
       price={item.price}
-      InstockStatus={item.InstockStatus}
+      quantity={item.quantity}
+      sum={item.sum}
+      image={item.image}
       shippingStatus={item.shippingStatus}
       amazonfullfilled="true"
       colorName="6 FEET-STRAIGHT BAR (26mm)"
-      quantity={4}
     />
   ));
-  useEffect(() => {
-    dispatch(setCartNumber(PRODUCTS.length));
-  });
+
+  // useEffect(() => {
+  //   dispatch(AddToCart(AllCartItems.length));
+  // });
   return (
     <Container>
       <ItemContainer>
         <Heading>
           <p>Shopping Cart</p>
         </Heading>
-        {CartList}
-        );
+        {AllCartItems.length > 0 ? (
+          CartList
+        ) : (
+          <h1>YOU DON'T HAVE ANY ITEMS IN YOUR CART YET!</h1>
+        )}
       </ItemContainer>
       <TotalContainer>
         <OrderEligibility>
@@ -44,7 +72,9 @@ const Cart = (props) => {
         </OrderEligibility>
 
         <Total>
-          <p>Subtotal (2 items): Rs.2,126.00</p>
+          <p>
+            Subtotal ({CartNumber} items): Rs.{totalAmount}
+          </p>
           <Button>Proceed to Buy</Button>
         </Total>
       </TotalContainer>

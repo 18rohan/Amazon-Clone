@@ -1,6 +1,12 @@
-export const SET_CART_NUMBER = "SET_CART_NUMBER";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_ITEM = "ADD_ITEM";
 
-export const setCartNumber = (payload) => ({
-  type: SET_CART_NUMBER,
-  number: payload,
+export const AddToCart = (payload) => ({
+  type: ADD_TO_CART,
+  product: payload,
+});
+
+export const AddItem = (payload) => ({
+  type: ADD_ITEM,
+  payload: payload,
 });
