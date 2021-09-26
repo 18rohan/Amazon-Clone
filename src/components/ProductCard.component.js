@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 // Import Icons
 import { FaRupeeSign } from "react-icons/fa";
 // Import actions
 import { AddToCart, AddItem } from "../store/actions/CartActions.js";
 import { useDispatch } from "react-redux";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const ProductCard = (props) => {
   const dispatch = useDispatch();
+  const [liked, setLiked] = useState();
+  const handleLike = (setLiked) => {
+    setLiked((currentState) => !currentState);
+  };
   return (
     <Container>
       <Imagediv>
@@ -46,6 +51,13 @@ const ProductCard = (props) => {
         >
           Add to Cart
         </Button>
+        <Icon
+          onClick={() => {
+            handleLike();
+          }}
+        >
+          {liked ? <AiFillHeart size={33} /> : <AiOutlineHeart size={33} />}
+        </Icon>
         <Button>Buy Now</Button>
       </AddtoCartContainer>
     </Container>
@@ -113,6 +125,14 @@ const PriceDiv = styled.div`
     line-height: normal;
     font-family: sans-serif;
   }
+`;
+const Icon = styled.button`
+  display: flex;
+  background-color: transparent;
+  border: 0px;
+  justify-content: center;
+  padding-top: 8px;
+  align-items: center;
 `;
 const RupeeSign = styled.div`
   display: flex;

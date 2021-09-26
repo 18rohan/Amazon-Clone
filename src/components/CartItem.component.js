@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+// import actions
+import { RemoveItem } from "../store/actions/CartActions.js";
+import { useDispatch } from "react-redux";
+
 const CartItem = (props) => {
+  const dispatch = useDispatch();
   return (
     <Container>
       <ImageContainer>
@@ -36,7 +41,12 @@ const CartItem = (props) => {
         </InfoRow>
         <LastRow>
           <QuantityButton>Qty: {props.quantity} </QuantityButton>
-          <Icon>
+          <Icon
+            onClick={() => {
+              console.log("Delete Clicked!");
+              // dispatch(RemoveItem(props.key));
+            }}
+          >
             <p>Delete</p>
           </Icon>
           <Icon>
@@ -145,12 +155,14 @@ const InfoRow = styled.div`
   }
 `;
 
-const Icon = styled.div`
+const Icon = styled.button`
   border-left: 1px solid #e3e6e6;
   margin-left: 7px;
   margin-right: 7px;
   padding: 3px;
   padding-left: 8px;
+  background-color: transparent;
+  border: 0px;
 
   p {
     color: #007185;

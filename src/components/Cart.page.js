@@ -23,6 +23,7 @@ const Cart = (props) => {
     for (var key in state.cart.cartItems) {
       transformedCartItems.push({
         key: key,
+
         heading: state.cart.cartItems[key].heading,
         price: state.cart.cartItems[key].price,
         quantity: state.cart.cartItems[key].quantity,
@@ -36,7 +37,7 @@ const Cart = (props) => {
 
     return transformedCartItems;
   });
-  const CartList = AllCartItems.map((item) => (
+  const CartList = CartItems.map((item) => (
     <CartItem
       heading={item.heading}
       price={item.price}
@@ -112,9 +113,11 @@ const Heading = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-  padding: 20px;
-  margin-bottom: 8px;
+  padding-top: 20px;
+  padding-left: 20px;
+  margin-bottom: 10px;
   width: 90%;
+  border-bottom: 1px solid #eeeeee;
 
   p {
     font-size: 28px;

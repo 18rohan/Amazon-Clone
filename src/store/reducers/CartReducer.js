@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_ITEM } from "../actions/CartActions.js";
+import { ADD_TO_CART, ADD_ITEM, REMOVE_ITEM } from "../actions/CartActions.js";
 
 // Import Data Model
 import CartItem from "../../models/cartItem.model.js";
@@ -60,6 +60,13 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
         totalAmount: state.totalAmount + AddedProduct.price,
+      };
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (cartItem) => cartItem.id !== action.payload
+        ),
       };
     default:
       return state;
