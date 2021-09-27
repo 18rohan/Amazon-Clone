@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // Import Icons
 import { FaRupeeSign } from "react-icons/fa";
 // Import actions
 import { AddToCart, AddItem } from "../store/actions/CartActions.js";
+import { AddItemToWishList } from "../store/actions/WishListActions.js";
 import { useDispatch } from "react-redux";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const ProductCard = (props) => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState();
-  const handleLike = (setLiked) => {
+
+  const handleLike = (liked) => {
     setLiked((currentState) => !currentState);
   };
   return (
@@ -19,7 +22,9 @@ const ProductCard = (props) => {
         <img src={props.image} alt="product image" />
       </Imagediv>
       <HeadingDiv>
-        <p>{props.heading}</p>
+        <Link to={"/" + props.id} style={{ textDecoration: "none" }}>
+          <p>{props.heading}</p>
+        </Link>
       </HeadingDiv>
       <RatingDiv>
         ⭐️⭐️⭐️⭐️ ⌄<span>54,551</span>
@@ -54,9 +59,14 @@ const ProductCard = (props) => {
         <Icon
           onClick={() => {
             handleLike();
+            dispatch(AddItemToWishList(props.product));
           }}
         >
-          {liked ? <AiFillHeart size={33} /> : <AiOutlineHeart size={33} />}
+          {liked ? (
+            <AiFillHeart size={33} color={"#007185"} />
+          ) : (
+            <AiOutlineHeart size={33} />
+          )}
         </Icon>
         <Button>Buy Now</Button>
       </AddtoCartContainer>
@@ -72,8 +82,8 @@ const Container = styled.div`
   width: 360px;
   max-height: 420px;
   min-height: 450px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
   z-index: 88;
   ${"" /* margin-left: 40px; */}
   ${"" /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */}
@@ -96,8 +106,10 @@ const HeadingDiv = styled.div`
   background-color: #ffffff;
   padding-top: 6px;
   padding-bottom: 6px;
+
   p {
-    font-size: 15px;
+    color: black;
+    font-size: 16px;
     font-weight: 600;
   }
 `;

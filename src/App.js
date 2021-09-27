@@ -9,6 +9,8 @@ import Home from "./components/Home.page";
 import Cart from "./components/Cart.page";
 import SigninPage from "./components/Signin.page";
 import ProductsPage from "./components/Products.page";
+import ProductDetail from "./components/ProductDetail.component.js";
+import Wishlist from "./components/Wishlist.page.js";
 
 const App = () => {
   return (
@@ -30,6 +32,14 @@ const App = () => {
           <Route exact path="/products">
             <Header />
             <ProductsPage />
+          </Route>
+          <Route exact path="/wishlist">
+            <Header />
+            <Wishlist />
+          </Route>
+          <Route exact path="/:id">
+            <Header />
+            <ProductDetail />
           </Route>
         </Switch>
       </Router>

@@ -1,8 +1,14 @@
-import { ADD_TO_CART, ADD_ITEM, REMOVE_ITEM } from "../actions/CartActions.js";
+import {
+  ADD_TO_CART,
+  ADD_ITEM,
+  INCREASE_ITEM,
+  DECREASE_ITEM,
+  REMOVE_ITEM,
+} from "../actions/CartActions.js";
 
 // Import Data Model
 import CartItem from "../../models/cartItem.model.js";
-import { addItemToCart } from "../../utils/AddToCart.utils.js";
+import { addItemToCart, RemoveFromCart } from "../../utils/Cart.utils.js";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -67,6 +73,31 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         cartItems: state.cartItems.filter(
           (cartItem) => cartItem.id !== action.payload
         ),
+      };
+    case INCREASE_ITEM:
+      return {
+        ...state,
+        cartItems: addItemToCart(state.cartItems, action.payload),
+        totalAmount: state.totalAmount + action.payload.price,
+      };
+    case DECREASE_ITEM:
+      const SelectedItem = action.payload;
+      // const UpdatedItem = state.cartItem.find(
+      //   (item) => item.id === SelectedItem.id
+      // );
+
+      const UpdatedItem = state.cartItems.map((cartItem) =>
+        cartItem.id === SelectedItem.id
+          ? {
+              ...cartItem,
+              quantity: cartItem.quantity - 1,
+            }
+          : cartItem
+      );
+      return {
+        ...state,
+        cartItems: RemoveFromCart(state.cartItems, action.payload),
+        totalAmount: state.totalAmount - SelectedItem.price,
       };
     default:
       return state;

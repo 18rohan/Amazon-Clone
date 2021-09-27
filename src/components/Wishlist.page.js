@@ -4,6 +4,7 @@ import styled from "styled-components";
 // Importing components
 import MainFeed from "./main.component";
 import CartItem from "./CartItem.component";
+import WishlistItem from "./WishListItem.component.js";
 import SigninCard from "./SigninCard.component";
 import { PRODUCTS } from "../Data/data.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,16 +13,15 @@ import { AddToCart } from "../store/actions/CartActions.js";
 const Cart = (props) => {
   const dispatch = useDispatch();
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-  const CartItems = useSelector((state) => state.cart.cartItems);
+  const WishListItems = useSelector((state) => state.wishlist.WishListItems);
 
   var CartNumber = 0;
-  CartItems.map((item) => (CartNumber += item.quantity));
+  WishListItems.map((item) => (CartNumber += item.quantity));
 
-  const CartList = CartItems.map((item) => (
-    <CartItem
+  const WishList = WishListItems.map((item) => (
+    <WishlistItem
       key={item.id}
       id={item.id}
-      product={item}
       heading={item.heading}
       price={item.price}
       quantity={item.quantity}
@@ -40,17 +40,17 @@ const Cart = (props) => {
     <Container>
       <ItemContainer>
         <Heading>
-          <p>Shopping Cart</p>
+          <p>Your WishList</p>
         </Heading>
-        {CartList.length > 0 ? (
-          CartList
+        {WishList.length > 0 ? (
+          WishList
         ) : (
           <h1>YOU DON'T HAVE ANY ITEMS IN YOUR CART YET!</h1>
         )}
       </ItemContainer>
-      <TotalContainer>
+      {/* <TotalContainer>
         <OrderEligibility>
-          <img src="images/greencheck.png" />
+          <img src="images/greencheck.png" alt="green tick logo" />
           <p>Your order is eligible for FREE Delivery</p>
           <span>Select this option at checkout.Details</span>
         </OrderEligibility>
@@ -61,7 +61,7 @@ const Cart = (props) => {
           </p>
           <Button>Proceed to Buy</Button>
         </Total>
-      </TotalContainer>
+      </TotalContainer> */}
     </Container>
   );
 };

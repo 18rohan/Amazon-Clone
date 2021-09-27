@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 // Import Icons
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -14,6 +14,8 @@ import { signoutAPI } from "../store/actions/UserActions.js";
 import { AddToCart } from "../store/actions/CartActions.js";
 import { PRODUCTS } from "../Data/data.js";
 
+// Import Fading animations
+import FadeIn from "../utils/Fadein.js";
 const Header = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.CurrentUser);
@@ -50,7 +52,7 @@ const Header = () => {
     <ParentContainer>
       <Container>
         <Left>
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <Logo>
               <img src="images/amazon-dark.png" alt="Amazon Logo" />
             </Logo>
@@ -76,7 +78,7 @@ const Header = () => {
           </Icon>
 
           <SigninContainer>
-            <Link to="/signin">
+            <Link to="/signin" style={{ textDecoration: "none" }}>
               <p>
                 <span>
                   Hello,{" "}
@@ -100,7 +102,7 @@ const Header = () => {
                     Sign Out
                   </LogoutButton>
                 ) : (
-                  <Link to="/signin">
+                  <Link to="/signin" style={{ textDecoration: "none" }}>
                     <SigninButton>
                       <p
                         style={{
@@ -148,7 +150,9 @@ const Header = () => {
                       <p>Your Orders</p>
                     </Item>
                     <Item>
-                      <p>Your Wishlist</p>
+                      <Link to="/wishlist" style={{ textDecoration: "none" }}>
+                        <p>Your Wishlist</p>
+                      </Link>
                     </Item>
                     <Item>
                       <p>Your Reccomendations</p>
@@ -167,7 +171,7 @@ const Header = () => {
               <span>Returns </span>& Orders
             </p>
           </Returns>
-          <Link to="/cart">
+          <Link to="/cart" style={{ textDecoration: "none" }}>
             <Cart>
               <CartCount>
                 <p>{BasketNumber}</p>
@@ -180,7 +184,7 @@ const Header = () => {
       <Menu>
         <MenuItem>
           <GiHamburgerMenu color="white" size={16} />
-          <Link to="/products">
+          <Link to="/products" style={{ textDecoration: "none" }}>
             <p>All</p>
           </Link>
         </MenuItem>
@@ -401,6 +405,7 @@ const HoverComponent = styled.div`
 
 const Dropdown = styled.div`
   display: none;
+  transition-delay: 3s;
 `;
 const SigninContainer = styled.div`
   display: flex;
@@ -424,6 +429,7 @@ const SigninContainer = styled.div`
 
   &:hover ${Dropdown} {
     display: block;
+    transition-delay: 3s;
   }
 `;
 

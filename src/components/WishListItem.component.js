@@ -4,11 +4,8 @@ import styled from "styled-components";
 // import actions
 import { RemoveItem } from "../store/actions/CartActions.js";
 import { useDispatch } from "react-redux";
-import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
-import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
-import { IncreaseItem, DecreaseItem } from "../store/actions/CartActions.js";
 
-const CartItem = (props) => {
+const WishlistItem = (props) => {
   const dispatch = useDispatch();
 
   return (
@@ -44,27 +41,7 @@ const CartItem = (props) => {
           </p>
         </InfoRow>
         <LastRow>
-          <QuantityButton>
-            {" "}
-            <Button
-              onClick={() => {
-                console.log("Decrease Clicked");
-                // Decrease Quantity
-                dispatch(DecreaseItem(props.product));
-              }}
-            >
-              <IoMdArrowDropleft size={20} />
-            </Button>
-            Qty: {props.quantity}
-            <Button
-              onClick={() => {
-                console.log("Increase Clicked");
-                dispatch(IncreaseItem(props.product));
-              }}
-            >
-              <IoMdArrowDropright size={20} />
-            </Button>
-          </QuantityButton>
+          <QuantityButton>Qty: {props.quantity} </QuantityButton>
           <Icon
             onClick={() => {
               console.log("Delete Clicked!: ", props.id);
@@ -146,22 +123,11 @@ const StockStatus = styled.div`
     font-weight: 400;
   }
 `;
-
-const Button = styled.button`
-  background-color: transparent;
-  width: 25px;
-  border: 0px;
-`;
 const QuantityButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 600;
   background-color: #e3e6e6;
   color: rgba(0, 0, 0, 0.7);
   border-radius: 7px;
-  width: 120px;
+  width: 70px;
   padding-top: 5px;
   padding-bottom: 5px;
   border: 1px solid #f9f9f9;
@@ -205,4 +171,4 @@ const Icon = styled.button`
     line-height: 16px;
   }
 `;
-export default CartItem;
+export default WishlistItem;

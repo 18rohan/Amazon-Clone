@@ -29,7 +29,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #eeeeee;
+  background-color: #ffffff;
 `;
 
 const Logo = styled.div`

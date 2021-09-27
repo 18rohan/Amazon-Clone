@@ -8,6 +8,7 @@ const ProductsPage = (props) => {
   const ProductList = PRODUCTS.map((item) => (
     <ProductCard
       key={item.id}
+      id={item.id}
       heading={item.heading}
       price={item.price}
       quantity={item.quantity}

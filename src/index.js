@@ -12,10 +12,12 @@ import logger from "redux-logger";
 // Redux Components
 import UserReducer from "../src/store/reducers/UserReducer.js";
 import CartReducer from "../src/store/reducers/CartReducer.js";
+import WishListReducer from "./store/reducers/WishListReducer.js";
 
 const rootReducer = combineReducers({
   user: UserReducer,
   cart: CartReducer,
+  wishlist: WishListReducer,
 });
 const middlewares = [logger, thunkMiddleware];
 const Store = createStore(rootReducer, applyMiddleware(...middlewares));
