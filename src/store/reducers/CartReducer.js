@@ -68,11 +68,14 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         totalAmount: state.totalAmount + AddedProduct.price,
       };
     case REMOVE_ITEM:
+      const ItemToRemove = action.payload;
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload
+          (cartItem) => cartItem.id !== action.payload.id
         ),
+        totalAmount:
+          state.totalAmount - ItemToRemove.price * ItemToRemove.quantity,
       };
     case INCREASE_ITEM:
       return {

@@ -3,29 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { combineReducers } from "redux";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
-import logger from "redux-logger";
+import { PersistGate } from "redux-persist/integration/react";
 
-// Redux Components
-import UserReducer from "../src/store/reducers/UserReducer.js";
-import CartReducer from "../src/store/reducers/CartReducer.js";
-import WishListReducer from "./store/reducers/WishListReducer.js";
-
-const rootReducer = combineReducers({
-  user: UserReducer,
-  cart: CartReducer,
-  wishlist: WishListReducer,
-});
-const middlewares = [logger, thunkMiddleware];
-const Store = createStore(rootReducer, applyMiddleware(...middlewares));
+import exporter from "./store/store.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={Store}>
-      <App />
+    <Provider store={exporter.Store}>
+      <PersistGate persistor={exporter.persistStor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -68,7 +68,7 @@ const CartItem = (props) => {
           <Icon
             onClick={() => {
               console.log("Delete Clicked!: ", props.id);
-              dispatch(RemoveItem(props.id));
+              dispatch(RemoveItem(props.product));
             }}
           >
             <p>Delete</p>

@@ -8,6 +8,7 @@ import SigninCard from "./SigninCard.component";
 import { PRODUCTS } from "../Data/data.js";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCart } from "../store/actions/CartActions.js";
+import StripeCheckoutButton from "./stripe-button/stripe-button.component.js";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
@@ -47,6 +48,12 @@ const Cart = (props) => {
         ) : (
           <h1>YOU DON'T HAVE ANY ITEMS IN YOUR CART YET!</h1>
         )}
+        <TestWarning>
+          <h1>**Please use the following Credentials for payment:</h1>
+          <h2>Card Number: 4242 4242 4242</h2>
+          <h2>Expiration Date: 02/24</h2>
+          <h2>CVV: 123</h2>
+        </TestWarning>
       </ItemContainer>
       <TotalContainer>
         <OrderEligibility>
@@ -59,7 +66,10 @@ const Cart = (props) => {
           <p>
             Subtotal ({CartNumber} items): Rs.{totalAmount}
           </p>
-          <Button>Proceed to Buy</Button>
+          {/* <Button>Proceed to Buy</Button> */}
+          <StripeContainer>
+            <StripeCheckoutButton price={totalAmount} />
+          </StripeContainer>
         </Total>
       </TotalContainer>
     </Container>
@@ -81,6 +91,13 @@ const Container = styled.div`
 
     background-color: white;
   }
+`;
+const StripeContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
 `;
 const Button = styled.div`
   width: 80%;
@@ -160,6 +177,25 @@ const Total = styled.div`
   p {
     font-size: 17px;
     font-weight: bold;
+  }
+`;
+
+const TestWarning = styled.div`
+  display: flex;
+  flex-direction: column;
+  widht: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  h1 {
+    font-weight: 400;
+    font-size: 18px;
+    color: red;
+  }
+  h2 {
+    font-weight: 400;
+    font-size: 16px;
+    color: red;
   }
 `;
 export default Cart;

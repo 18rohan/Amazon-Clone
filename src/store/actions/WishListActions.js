@@ -6,7 +6,7 @@ export const AddItemToWishList = (payload) => ({
   payload: payload,
 });
 
-export const RemoveItemFromWishList = (payload) => ({
+export const DeleteFromWishList = (payload) => ({
   type: DELETE_FROM_WISHLIST,
   payload: payload,
 });
