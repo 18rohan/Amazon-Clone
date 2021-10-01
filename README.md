@@ -21,6 +21,7 @@ Users can authenticate using the following two methods
  - Orders Page:
     - Linking the orders to an individual user
 
+<img src="Screenshots/Home.png" />
 
 
 # Getting Started with Create React App
