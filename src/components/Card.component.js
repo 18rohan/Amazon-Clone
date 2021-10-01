@@ -20,7 +20,11 @@ const Card = (props) => {
 const Container = styled.div`
   background-color: white;
   width: 340px;
+  max-width: 340px;
+  min-width: 340px;
   height: 410px;
+  min-height: 410px;
+  max-height: 410px;
   margin-left: 18px;
   margin-right: 8px;
   z-index: 88;
@@ -70,8 +74,10 @@ const Image_div = styled.div`
   background-color: transparent;
   padding-left: 20px;
   padding-right: 20px;
+  overflow: hidden;
   img {
     width: 100%;
+    max-width: 100%;
   }
   @media (max-width: 768px) {
     width: 90%;

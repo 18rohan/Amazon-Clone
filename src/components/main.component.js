@@ -55,7 +55,7 @@ const MainFeed = (props) => {
       </ProductRow1>
       <ProductRow1>
         <Card
-          image="images/asset 98.jpeg"
+          image="images/asset 58.jpeg"
           caption="Up to 70% off | Electronics clearance store"
         />
         <Card
@@ -65,6 +65,10 @@ const MainFeed = (props) => {
         <Card
           image="images/asset 63.jpeg"
           caption="Sale starts early for Prime members"
+        />
+        <Card
+          image="images/asset 108.jpeg"
+          caption="Upto 65% off | Prime members"
         />
       </ProductRow1>
       <ProductRow3>{ProductList}</ProductRow3>

@@ -124,7 +124,7 @@ const Imagediv = styled.div`
 `;
 const HeadingDiv = styled.div`
   width: 100%;
-  background-color: #ffffff;
+  background-color: transparent;
   padding-top: 6px;
   padding-bottom: 6px;
 
