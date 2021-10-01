@@ -15,7 +15,7 @@ const SigninPage = (props) => {
       {currentUser && <Redirect to="/" />}
       <Link to="/">
         <Logo>
-          <img src="images/amazoncom.png" alt="amazon logo" />
+          <img src="images/amazon_logo.png" alt="amazon logo" />
         </Logo>
       </Link>
       <Signin />
@@ -26,6 +26,7 @@ const SigninPage = (props) => {
 const Container = styled.div`
   display: flex;
   width: 100%;
+  height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -37,7 +38,8 @@ const Logo = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-bottom: -20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   img {
     width: 160px;
   }

@@ -38,10 +38,6 @@ const HomeCarousel = (props) => {
         <img src="images/asset3.jpeg" alt="third" />
         {/* <p className="legend">Legend 3</p> */}
       </Slider>
-      <Slider>
-        <img src="images/asset7.jpeg" alt="third" />
-        {/* <p className="legend">Legend 3</p> */}
-      </Slider>
     </Carousel>
   );
 };
@@ -56,6 +52,22 @@ const Slider = styled.div`
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0)
     );
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    img {
+      width:100%;
+      height:auto;
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0)
+      );
   }
 `;
 

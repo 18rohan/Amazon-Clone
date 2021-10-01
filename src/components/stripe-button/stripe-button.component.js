@@ -16,7 +16,6 @@ const StripeCheckoutButton = ({ price }) => {
       billingAddress
       shippingAddress
       image="https://pbs.twimg.com/media/ESRg6JZXkAAhMFe.png"
-      alipay
       description={`Your total is ₹${price}`}
       amount={PriceForStripe}
       panelLabel="Pay now"

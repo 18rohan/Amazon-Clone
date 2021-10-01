@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 // Import Icons
@@ -9,34 +9,33 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 // Import packages
 import { Link } from "react-router-dom";
+import { db, auth, storage, provider } from "../firebase/firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutAPI } from "../store/actions/UserActions.js";
 import { AddToCart } from "../store/actions/CartActions.js";
 import { PRODUCTS } from "../Data/data.js";
+import {
+  AddItem,
+  SetCart,
+  AddToWishListAPI,
+} from "../store/actions/CartActions.js";
 
 // Import Fading animations
 import FadeIn from "../utils/Fadein.js";
 const Header = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.CurrentUser);
-  // const AllCartItems = useSelector((state) => {
-  //   const transformedCartItems = [];
-  //   for (var key in state.cart.cartItems) {
-  //     transformedCartItems.push({
-  //       key: key,
-  //       heading: state.cart.cartItems[key].heading,
-  //       price: state.cart.cartItems[key].price,
-  //       quantity: state.cart.cartItems[key].quantity,
-  //       sum: state.cart.cartItems[key].sum,
-  //       image: state.cart.cartItems[key].image,
-  //       // InstockStatus: state.cart.cartItems.InstockStatus,
-  //       shippingStatus: state.cart.cartItems.shippingStatus,
-  //       // amazonfullfilled: state.cart.cartItems.amazonfullfilled,
-  //     });
-  //   }
-  //
-  //   return transformedCartItems;
-  // });
+
+  if (currentUser) {
+    if (currentUser.displayName) {
+      var user = currentUser.displayName.split(" ")[0];
+    } else if (currentUser.email) {
+      user = currentUser.email.split("@")[0];
+    }
+  } else {
+    user = "Sign in";
+  }
   const AllCartItems = useSelector((state) => state.cart.cartItems);
   var CartNumber = 0;
   AllCartItems.map((item) => {
@@ -45,9 +44,29 @@ const Header = () => {
   console.log("ALL CART ITEMS: ", AllCartItems);
   // const BasketNumber = AllCartItems.length;
   const BasketNumber = CartNumber;
-  // useEffect(() => {
-  //   dispatch(AddToCart(BasketNumber));
-  // });
+
+  const FetchUser = async () => {
+    if (!currentUser) {
+      return;
+    } else {
+      const docRef = doc(db, "users", currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      const FetchedData = docSnap.data();
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        dispatch(
+          SetCart({ product: FetchedData.cart, user_id: currentUser.uid })
+        );
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+  };
+
+  useLayoutEffect(() => {
+    FetchUser();
+  }, []);
   return (
     <ParentContainer>
       <Container>
@@ -80,15 +99,8 @@ const Header = () => {
           <SigninContainer>
             <Link to="/signin" style={{ textDecoration: "none" }}>
               <p>
-                <span>
-                  Hello,{" "}
-                  {currentUser ? (
-                    currentUser.displayName.split(" ")[0]
-                  ) : (
-                    <span>Welcome back</span>
-                  )}{" "}
-                </span>
-                Accounts & Lists ▾
+                <span>Hello, {user}</span>
+                <div>Accounts & Lists ▾</div>
               </p>
             </Link>
             <Dropdown>
@@ -219,9 +231,7 @@ const Header = () => {
         <MenuItem>
           <p>Computers</p>
         </MenuItem>
-        <MenuItem>
-          <p>Home & Kitchen</p>
-        </MenuItem>
+
         <MenuItem>
           <p>Books</p>
         </MenuItem>
@@ -242,6 +252,11 @@ const Header = () => {
 const ParentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 102vw;
+    display: flex;
+  }
 `;
 const Container = styled.div`
   background-color: #131921;
@@ -249,6 +264,9 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Menu = styled.div`
@@ -259,6 +277,14 @@ const Menu = styled.div`
   width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: red;
+    width: 99%;
+  }
 `;
 
 const LogoutButton = styled.button`
@@ -272,6 +298,7 @@ const LogoutButton = styled.button`
   border-radius: 4px;
   padding: 8px;
   margin-top: 10px;
+  cursor: pointer;
   border: 1px solid grey;
   p {
     padding-bottom: 4px;
@@ -310,6 +337,8 @@ const MenuItem = styled.div`
   margin-bottom: 6px;
   margin-left: 6px;
   margin-right: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
   border: 1px solid transparent;
   p {
     color: white;
@@ -318,6 +347,14 @@ const MenuItem = styled.div`
   }
   &:hover {
     border: 1px solid white;
+  }
+  @media (max-width: 768px) {
+    width: 120px;
+    padding: 0;
+    margin: 0;
+    p {
+      font-size: 12px;
+    }
   }
 `;
 const Left = styled.div`
@@ -328,14 +365,27 @@ const Left = styled.div`
   padding-top: 8px;
   padding-right: 2px;
   margin-left: 8px;
-  width: 40%;
+  width: 50%;
+  @media (max-width: 768px) {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 4px;
+    margin-right: 0px;
+    align-items: center;
+  }
 `;
 const Right = styled.div`
-  width: 55%;
+  width: 65%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 15%;
+    margin: 0px;
+  }
 `;
 
 const Icon = styled.div`
@@ -351,6 +401,9 @@ const Icon = styled.div`
   p {
     color: grey;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Logo = styled.div`
   display: flex;
@@ -365,6 +418,18 @@ const Logo = styled.div`
   margin-top: 8px;
   img {
     width: 100px;
+  }
+  @media (max-width: 768px) {
+    width: 30%;
+    display: flex;
+    margin: 0px;
+    padding-right: 0px;
+    padding-left: 2px;
+    flex-direction: row;
+    justify-content: flex-start;
+    img {
+      width: 80px;
+    }
   }
 `;
 
@@ -386,6 +451,9 @@ const SelectAddress = styled.div`
   p span {
     display: block;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const HoverComponent = styled.div`
@@ -399,8 +467,8 @@ const HoverComponent = styled.div`
   width: 370px;
   height: 320px;
   position: absolute;
-  top: 55px;
-  right: 170px;
+  top: 50px;
+  right: 80px;
 `;
 
 const Dropdown = styled.div`
@@ -411,8 +479,11 @@ const SigninContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 41%;
+  width: 58%;
   padding-left: 5px;
+  span {
+    display: inline-block;
+  }
   p {
     color: white;
     font-size: 14px;
@@ -431,6 +502,9 @@ const SigninContainer = styled.div`
     display: block;
     transition-delay: 3s;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SearchBar = styled.div`
@@ -438,10 +512,28 @@ const SearchBar = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 40px;
   background-color: white;
   border-radius: 3px;
+  input {
+    width: 90%;
+    height: 30px;
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 4px #f0c14b;
+      border: 2px solid #f0c14b;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 100vh;
+    margin-left: 2px;
+    margin-right: 2px;
+    height: 35px;
+    input {
+      height: 30px;
+    }
+  }
 `;
 
 const CategoryButton = styled.button`
@@ -453,6 +545,9 @@ const CategoryButton = styled.button`
   border-right: 1px solid #eeeeee;
   color: grey;
   font-size: 12px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const InputField = styled.input`
@@ -475,8 +570,10 @@ const SearchButton = styled.button`
 const Returns = styled.div`
   display: flex;
   flex-direction: column;
-  width: 22%;
-
+  width: 32%;
+  span {
+    display: block;
+  }
   p {
     color: white;
     font-size: 14px;
@@ -485,6 +582,9 @@ const Returns = styled.div`
   p > span {
     font-size: 12px;
     font-weight: 400;
+  }
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -499,6 +599,14 @@ const Cart = styled.div`
     color: white;
     padding-top: 2px;
     line-height: 3px;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-right: 2px;
   }
 `;
 

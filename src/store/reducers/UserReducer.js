@@ -1,4 +1,4 @@
-import { SET_USER } from "../actions/UserActions.js";
+import { SET_USER, ADD_USER } from "../actions/UserActions.js";
 
 const InitialState = {
   CurrentUser: null,
@@ -9,6 +9,11 @@ const UserReducer = (state = InitialState, action) => {
       return {
         ...state,
         CurrentUser: action.user,
+      };
+    case ADD_USER:
+      return {
+        ...state,
+        CurrentUser: action,
       };
     default:
       return state;

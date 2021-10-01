@@ -4,6 +4,8 @@ import {
   INCREASE_ITEM,
   DECREASE_ITEM,
   REMOVE_ITEM,
+  EMPTY_CART,
+  SET_CART,
 } from "../actions/CartActions.js";
 
 // Import Data Model
@@ -17,54 +19,24 @@ const INITIAL_STATE = {
 
 const CartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
-      const addedProduct = action.product;
-      const quantity = action.product.quantity;
-      const price = action.product.price;
-      const image = action.product.image;
-      const heading = action.product.heading;
-      // const fullfilled = action.product.amazonFullfilled;
-      const shippingStatus = action.product.shippingStatus;
-      const sum = quantity * price;
-      if (state.cartItems[addedProduct.id]) {
-        const updatedItem = new CartItem(
-          state.cartItems[addedProduct.id].quantity + 1,
-          heading,
-          price,
-          quantity,
-          sum,
-          image,
-          shippingStatus
-        );
-        return {
-          ...state,
-          cartItems: { ...state.cartItems, [addedProduct.id]: updatedItem },
-          // cartItems: [...state.cartItems, updatedItem],
-          totalAmount: state.totalAmount + price,
-        };
-      } else {
-        const newCartItem = new CartItem(
-          1,
-          heading,
-          price,
-          quantity,
-          sum,
-          image,
-          shippingStatus
-        );
-        return {
-          ...state,
-          cartItems: { ...state.cartItems, [addedProduct.id]: newCartItem },
-          // cartItems: [...state.cartItems, newCartItem],
-          totalAmount: state.totalAmount + price,
-        };
-      }
+    case SET_CART:
+      var sum = 0;
+      const Products = action.payload.product;
+      var sum = 0;
+      Products.map((product) => {
+        sum = sum + product.price * product.quantity;
+      });
+
+      return {
+        cartItems: action.payload.product,
+        totalAmount: sum,
+      };
     case ADD_ITEM:
-      const AddedProduct = action.payload;
+      const AddedProduct = action.payload.product;
 
       return {
         ...state,
-        cartItems: addItemToCart(state.cartItems, action.payload),
+        cartItems: addItemToCart(state.cartItems, action.payload.product),
         totalAmount: state.totalAmount + AddedProduct.price,
       };
     case REMOVE_ITEM:
@@ -101,6 +73,11 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: RemoveFromCart(state.cartItems, action.payload),
         totalAmount: state.totalAmount - SelectedItem.price,
+      };
+    case EMPTY_CART:
+      return {
+        cartItems: INITIAL_STATE.cartItems,
+        totalAmount: INITIAL_STATE.totalAmount,
       };
     default:
       return state;

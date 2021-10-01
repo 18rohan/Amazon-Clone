@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const SigninCard = (props) => {
   return (
     <Container>
@@ -9,7 +9,17 @@ const SigninCard = (props) => {
       </Info_div>
 
       <Last_div>
-        <Button>Sign in securely</Button>
+        <Link
+          to="/signin"
+          style={{
+            textDecoration: "none",
+            width: "100%",
+            color: "black",
+            fontWeight: "400",
+          }}
+        >
+          <Button>Sign in securely</Button>
+        </Link>
       </Last_div>
     </Container>
   );
@@ -21,7 +31,11 @@ const Container = styled.div`
   margin-left: 18px;
   margin-right: 8px;
   z-index: 88;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  ${"" /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */}
+  @media (max-width: 768px) {
+    min-width: 320px;
+    margin-top: 20px;
+  }
 `;
 
 const Info_div = styled.div`
@@ -67,6 +81,7 @@ const Button = styled.div`
   font-size: 13px;
   text-align: center;
   border-radius: 8px;
+  cursor: pointer;
 `;
 const Image_div = styled.div`
   height: 60%;

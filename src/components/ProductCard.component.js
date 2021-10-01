@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 // Import Icons
 import { FaRupeeSign } from "react-icons/fa";
 // Import actions
-import { AddToCart, AddItem } from "../store/actions/CartActions.js";
+import {
+  AddToCart,
+  AddItem,
+  AddToCartAPI,
+} from "../store/actions/CartActions.js";
+import { AddToWishListAPI } from "../store/actions/WishListActions.js";
 import { AddItemToWishList } from "../store/actions/WishListActions.js";
 import { useDispatch } from "react-redux";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -12,7 +24,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 const ProductCard = (props) => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState();
-
+  const user = useSelector((state) => state.user.CurrentUser);
   const handleLike = (liked) => {
     setLiked((currentState) => !currentState);
   };
@@ -50,8 +62,15 @@ const ProductCard = (props) => {
       <AddtoCartContainer>
         <Button
           onClick={() => {
-            console.log("ADD TO CART CLICKED!!");
-            dispatch(AddItem(props.product));
+            {
+              user ? (
+                dispatch(
+                  AddToCartAPI({ product: props.product, user_id: user.uid })
+                )
+              ) : (
+                <Redirect to="/signin" />
+              );
+            }
           }}
         >
           Add to Cart
@@ -59,7 +78,9 @@ const ProductCard = (props) => {
         <Icon
           onClick={() => {
             handleLike();
-            dispatch(AddItemToWishList(props.product));
+            dispatch(
+              AddToWishListAPI({ product: props.product, user_id: user.uid })
+            );
           }}
         >
           {liked ? (

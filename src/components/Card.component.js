@@ -24,7 +24,10 @@ const Container = styled.div`
   margin-left: 18px;
   margin-right: 8px;
   z-index: 88;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  @media (max-width: 768px) {
+    min-width: 320px;
+    margin-top: 20px;
+  }
 `;
 
 const Info_div = styled.div`
@@ -69,6 +72,15 @@ const Image_div = styled.div`
   padding-right: 20px;
   img {
     width: 100%;
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    ${"" /* padding-right: 8px; */}
+    ${"" /* padding-left: 8px; */}
+    img {
+      width: 100%;
+      padding: 0px;
+    }
   }
 `;
 

@@ -10,7 +10,7 @@ import WishListReducer from "../reducers/WishListReducer.js";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"],
+  whitelist: ["cart", "user", "wishlist"],
 };
 
 const RootReducer = combineReducers({

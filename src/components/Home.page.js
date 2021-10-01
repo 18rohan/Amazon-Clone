@@ -26,5 +26,13 @@ const Container = styled.div`
 
     background-color: white;
   }
+  @media (max-width: 768px) {
+    width: 100;
+    margin: 0px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 export default Home;

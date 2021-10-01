@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Importing components
@@ -7,32 +7,48 @@ import CartItem from "./CartItem.component";
 import SigninCard from "./SigninCard.component";
 import { PRODUCTS } from "../Data/data.js";
 import { useDispatch, useSelector } from "react-redux";
-import { AddToCart } from "../store/actions/CartActions.js";
+
 import StripeCheckoutButton from "./stripe-button/stripe-button.component.js";
+import { db, auth, storage, provider } from "../firebase/firebaseConfig.js";
+import {
+  AddToCart,
+  AddItem,
+  AddToCartAPI,
+  AddToWishListAPI,
+} from "../store/actions/CartActions.js";
+import { doc, getDoc } from "firebase/firestore";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.user.CurrentUser);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const CartItems = useSelector((state) => state.cart.cartItems);
+  // Fetch Data from firebase
 
+  const currentCart = useSelector((state) => state.cart.cartItems);
+  console.log("CURRENT CART: ", currentCart);
   var CartNumber = 0;
   CartItems.map((item) => (CartNumber += item.quantity));
-
-  const CartList = CartItems.map((item) => (
-    <CartItem
-      key={item.id}
-      id={item.id}
-      product={item}
-      heading={item.heading}
-      price={item.price}
-      quantity={item.quantity}
-      sum={item.sum}
-      image={item.image}
-      shippingStatus={item.shippingStatus}
-      amazonfullfilled="true"
-      colorName="6 FEET-STRAIGHT BAR (26mm)"
-    />
-  ));
+  if (currentCart) {
+    var CartList = currentCart.map((item) => (
+      <CartItem
+        key={item.id}
+        id={item.id}
+        product={item}
+        heading={item.heading}
+        price={item.price}
+        quantity={item.quantity}
+        sum={item.sum}
+        image={item.image}
+        shippingStatus={item.shippingStatus}
+        amazonfullfilled="true"
+        colorName="6 FEET-STRAIGHT BAR (26mm)"
+      />
+    ));
+  } else {
+    CartList = "YOUR CART IS CURRENTLY EMPTY";
+  }
 
   // useEffect(() => {
   //   dispatch(AddToCart(AllCartItems.length));
@@ -189,12 +205,12 @@ const TestWarning = styled.div`
   margin-top: 80px;
   h1 {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
     color: red;
   }
   h2 {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     color: red;
   }
 `;
