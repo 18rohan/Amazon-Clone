@@ -21,6 +21,8 @@ Users can authenticate using the following two methods
  - Orders Page:
     - Linking the orders to an individual user
 
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
