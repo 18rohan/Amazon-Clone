@@ -97,7 +97,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   background-color: #eeeeee;
-
+  padding-top: 100px;
   height: 100vh;
   @media (min-width: 1600px) {
     width: 100%;
@@ -132,8 +132,9 @@ const Heading = styled.div`
   padding-top: 20px;
   padding-left: 20px;
   margin-bottom: 10px;
+  padding-bottom: 15px;
   width: 90%;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   p {
     font-size: 28px;

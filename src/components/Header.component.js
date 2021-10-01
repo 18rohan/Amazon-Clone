@@ -253,6 +253,8 @@ const ParentContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: fixed;
+  z-index: 400;
   @media (max-width: 768px) {
     width: 102vw;
     display: flex;

@@ -91,6 +91,7 @@ const Container = styled.div`
 
 const CarouselContainer = styled.div`
   width: 100%;
+  padding-top: 120px;
   margin-bottom: -270px;
   @media (max-width: 768px) {
     width: 100%;
