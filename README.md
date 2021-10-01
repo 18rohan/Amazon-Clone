@@ -1,3 +1,26 @@
+# About the Project
+A working Amazon-clone with the following features:
+## User Authentication
+Users can authenticate using the following two methods
+  - Email/Password Sign up
+  - Google Login
+## A working user cart
+  - The data in the cart is in sync with the data in the backend(firestore), which means the items saved in the cart will be saved even after the user logs out.The     cart will only display items which were added by the user.
+  - User can add items to the cart, by clicking on the "Add To Cart" button, and the cart shows the items added along with the total Amount.
+  - User can change the quantity of the product in the cart itself, by increasing or decreasing the quantity.
+  - The changes in the cart are shown in realtime, without refresh.
+## A working WishList
+  - User can add items to the wishlist, for future reference. User can do so, by clicking on the 'heart' button available on the product.
+  - The changes in the wishlist are shown in realtime
+  - The data in the wishlist is also in sync with the backend, and will only display the items added by an individual user.
+## Stripe Payment
+  - This project also has an integrated stripe payment in test mode
+ 
+### Future Features
+ - Checkout Page with Node ExpressJS servers to store the transactions made by the users.
+ - Orders Page:
+    - Linking the orders to an individual user
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
