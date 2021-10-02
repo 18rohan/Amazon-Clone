@@ -1,15 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
-
-import {
-  doc,
-  setDoc,
-  collection,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore";
-import { db, auth, storage, provider } from "../../firebase/firebaseConfig";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_ITEM = "ADD_ITEM";

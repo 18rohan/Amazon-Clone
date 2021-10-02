@@ -1,5 +1,4 @@
 import {
-  ADD_TO_CART,
   ADD_ITEM,
   INCREASE_ITEM,
   DECREASE_ITEM,
@@ -9,7 +8,7 @@ import {
 } from "../actions/CartActions.js";
 
 // Import Data Model
-import CartItem from "../../models/cartItem.model.js";
+
 import { addItemToCart, RemoveFromCart } from "../../utils/Cart.utils.js";
 
 const INITIAL_STATE = {
@@ -20,12 +19,9 @@ const INITIAL_STATE = {
 const CartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_CART:
-      var sum = 0;
       const Products = action.payload.product;
       var sum = 0;
-      Products.map((product) => {
-        sum = sum + product.price * product.quantity;
-      });
+      Products.map((product) => (sum = sum + product.price * product.quantity));
 
       return {
         cartItems: action.payload.product,
@@ -61,14 +57,14 @@ const CartReducer = (state = INITIAL_STATE, action) => {
       //   (item) => item.id === SelectedItem.id
       // );
 
-      const UpdatedItem = state.cartItems.map((cartItem) =>
-        cartItem.id === SelectedItem.id
-          ? {
-              ...cartItem,
-              quantity: cartItem.quantity - 1,
-            }
-          : cartItem
-      );
+      // const UpdatedItem = state.cartItems.map((cartItem) =>
+      //   cartItem.id === SelectedItem.id
+      //     ? {
+      //         ...cartItem,
+      //         quantity: cartItem.quantity - 1,
+      //       }
+      //     : cartItem
+      // );
       return {
         ...state,
         cartItems: RemoveFromCart(state.cartItems, action.payload),

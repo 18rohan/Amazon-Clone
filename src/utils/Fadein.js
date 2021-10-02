@@ -33,7 +33,7 @@ const FadeIn = ({ duration = 300, delay = 0, children, ...delegated }) => {
 };
 const Wrapper = styled.div`
   @media (prefers-reduced-motion: no-preference) {
-    animation-name: ${fadeOut};
+    animation-name: ${fadeIn};
     animation-fill-mode: backwards;
   }
 `;

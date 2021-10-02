@@ -11,7 +11,7 @@ const WishlistItem = (props) => {
   return (
     <Container>
       <ImageContainer>
-        <img src={props.image} />
+        <img src={props.image} alt="product" />
       </ImageContainer>
 
       <Description>

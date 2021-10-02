@@ -59,6 +59,14 @@ const Container = styled.div`
 
     backaground-color: white;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    ${"" /* padding-left: 3px;
+    padding-right: 3px; */}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 const CoverImg = styled.div`
   width: 100%;
@@ -88,9 +96,18 @@ const ProductRow = styled.div`
   width: 100%;
   flex-wrap: wrap;
   padding-bottom: 35px;
+  @media (max-width: 768px) {
+    width: 768px;
+    ${"" /* padding-left: 3px;
+    padding-right: 3px; */}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 const ProductsContainer = styled.div`
   display: flex;
+  flex-direction: row;
   width: 100%;
   justify-content: center;
   align-items: center;

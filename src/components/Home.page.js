@@ -27,7 +27,8 @@ const Container = styled.div`
     background-color: white;
   }
   @media (max-width: 768px) {
-    width: 100;
+    width: 100%;
+    min-width: 768px;
     margin: 0px;
     padding: 2px;
     display: flex;

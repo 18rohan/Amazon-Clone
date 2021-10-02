@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const SigninCard = (props) => {
   return (
     <Container>
-      <Info_div>
+      <InfoDiv>
         <p>Sign in for your best experience</p>
-      </Info_div>
+      </InfoDiv>
 
-      <Last_div>
+      <LastDiv>
         <Link
           to="/signin"
           style={{
@@ -20,7 +20,7 @@ const SigninCard = (props) => {
         >
           <Button>Sign in securely</Button>
         </Link>
-      </Last_div>
+      </LastDiv>
     </Container>
   );
 };
@@ -38,7 +38,7 @@ const Container = styled.div`
   }
 `;
 
-const Info_div = styled.div`
+const InfoDiv = styled.div`
   height: 40%;
 
   background-color: transparent;
@@ -56,7 +56,7 @@ const Info_div = styled.div`
     font-size: 22px;
   }
 `;
-const Last_div = styled.div`
+const LastDiv = styled.div`
   height: 10%;
   width: 100%;
   background-color: transparent;
@@ -82,15 +82,6 @@ const Button = styled.div`
   text-align: center;
   border-radius: 8px;
   cursor: pointer;
-`;
-const Image_div = styled.div`
-  height: 60%;
-  background-color: transparent;
-  padding-left: 20px;
-  padding-right: 20px;
-  img {
-    width: 100%;
-  }
 `;
 
 export default SigninCard;

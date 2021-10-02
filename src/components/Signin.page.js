@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 // Import packages
 import Signin from "./Signin.component";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const SigninPage = (props) => {
   const currentUser = useSelector((state) => state.user.CurrentUser);

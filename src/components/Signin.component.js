@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Import icons
 import { FcGoogle } from "react-icons/fc";
@@ -121,13 +121,7 @@ const SigninLogo = styled.div`
 
   background-color: white;
 `;
-const FieldsContainer = styled.div`
-  display: block;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-`;
+
 const Button = styled.button`
   width: 100%;
   background-color: #f0c14b;
@@ -245,29 +239,7 @@ const ButtonContainer = styled.div`
     color: #0066c0;
   }
 `;
-const GoogleLoginButton = styled.button`
-  width: 90%;
-  background-color: #ffffff;
-  display: flex;
-  padding: 4px;
-  justify-content: center;
-  align-items: center;
-  font-size: 13px;
-  text-align: center;
-  border-radius: 4px;
-  margin-top: 8px;
-  border: 2px solid #eeeeee;
-  cursor: pointer;
-  margin-bottom: 3px;
-  p {
-    font-size: 13px;
-  }
-  &:hover {
-    outline: none;
-    box-shadow: 0px 0px 2px #f0c14b;
-    border: 2px solid #f0c14b;
-  }
-`;
+
 const SignupLogo = styled.div`
   background-color: white;
   display: flex;

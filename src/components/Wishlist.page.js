@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 // Importing components
-import MainFeed from "./main.component";
-import CartItem from "./CartItem.component";
+
 import WishlistItem from "./WishListItem.component.js";
-import SigninCard from "./SigninCard.component";
-import { PRODUCTS } from "../Data/data.js";
-import { useDispatch, useSelector } from "react-redux";
-import { AddToCart } from "../store/actions/CartActions.js";
+
+import { useSelector } from "react-redux";
 
 const Cart = (props) => {
-  const dispatch = useDispatch();
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
   const WishListItems = useSelector((state) => state.wishlist.WishListItems);
 
   var CartNumber = 0;
@@ -82,15 +77,7 @@ const Container = styled.div`
     background-color: white;
   }
 `;
-const Button = styled.div`
-  width: 80%;
-  background-color: #ffd814;
-  padding: 8px;
-  font-size: 13px;
-  text-align: center;
-  border-radius: 8px;
-  margin-top: 13px;
-`;
+
 const Heading = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -117,49 +104,4 @@ const ItemContainer = styled.div`
   margin-bottom: 40px;
 `;
 
-const TotalContainer = styled.div`
-  display: flex;
-  width: 250px;
-  align-items: center;
-  margin-top: 40px;
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: 14px;
-  height: 160px;
-  background-color: white;
-  flex-direction: column;
-`;
-const OrderEligibility = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: #007185;
-    font-size: 12px;
-  }
-  span {
-    font-size: 12px;
-    color: grey;
-  }
-  img {
-    width: 7%;
-  }
-`;
-
-const Total = styled.div`
-  padding-top: 34px;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  h1 {
-    font-size: 18px;
-  }
-  p {
-    font-size: 17px;
-    font-weight: bold;
-  }
-`;
 export default Cart;

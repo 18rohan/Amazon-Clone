@@ -8,15 +8,8 @@ import {
 } from "firebase/auth";
 
 // import { provider } from "../../firebase/firebaseConfig";
-import { db, auth, storage, provider } from "../../firebase/firebaseConfig";
-import {
-  collection,
-  doc,
-  addDoc,
-  setDoc,
-  getDoc,
-  Timestamp,
-} from "firebase/firestore";
+import { db, auth, provider } from "../../firebase/firebaseConfig";
+import { doc, setDoc, getDoc, Timestamp } from "firebase/firestore";
 import { EmptyCart } from "./CartActions.js";
 // Google Login
 export const SET_USER = "SET_USER";
@@ -34,8 +27,9 @@ export function signInAPI() {
       const payload = await signInWithPopup(auth, provider);
       const credential = GoogleAuthProvider.credentialFromResult(payload);
       const token = credential.accessToken;
+      console.log(token);
       const user = payload.user;
-      console.log("USER_ID: ", user.uid);
+      // console.log("USER_ID: ", user.uid,"TOKEN: ");
 
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
@@ -150,6 +144,7 @@ export const Login = (payload) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode, ":", errorMessage);
       });
   };
 };

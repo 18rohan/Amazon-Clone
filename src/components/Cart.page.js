@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Importing components
-import MainFeed from "./main.component";
+
 import CartItem from "./CartItem.component";
-import SigninCard from "./SigninCard.component";
-import { PRODUCTS } from "../Data/data.js";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 
 import StripeCheckoutButton from "./stripe-button/stripe-button.component.js";
-import { db, auth, storage, provider } from "../firebase/firebaseConfig.js";
-import {
-  AddToCart,
-  AddItem,
-  AddToCartAPI,
-  AddToWishListAPI,
-} from "../store/actions/CartActions.js";
-import { doc, getDoc } from "firebase/firestore";
 
 const Cart = (props) => {
-  const dispatch = useDispatch();
-
-  const currentUser = useSelector((state) => state.user.CurrentUser);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const CartItems = useSelector((state) => state.cart.cartItems);
   // Fetch Data from firebase
@@ -73,7 +60,7 @@ const Cart = (props) => {
       </ItemContainer>
       <TotalContainer>
         <OrderEligibility>
-          <img src="images/greencheck.png" />
+          <img src="images/greencheck.png" alt="green check" />
           <p>Your order is eligible for FREE Delivery</p>
           <span>Select this option at checkout.Details</span>
         </OrderEligibility>
@@ -101,11 +88,24 @@ const Container = styled.div`
   height: 100vh;
   @media (min-width: 1600px) {
     width: 100%;
+    display: flex;
+    height: 100vh;
+
+    flex-direction: column;
     margin-left: 225px;
     border: 0px;
     max-width: 1500px;
 
     background-color: white;
+  }
+  @media (max-width: 768px) {
+    width: 768px;
+    display: flex;
+    padding-top: 0px;
+    height: 1200px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    flex-direction: column;
   }
 `;
 const StripeContainer = styled.div`
@@ -115,15 +115,7 @@ const StripeContainer = styled.div`
   align-items: center;
   padding-top: 8px;
 `;
-const Button = styled.div`
-  width: 80%;
-  background-color: #ffd814;
-  padding: 8px;
-  font-size: 13px;
-  text-align: center;
-  border-radius: 8px;
-  margin-top: 13px;
-`;
+
 const Heading = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -139,6 +131,16 @@ const Heading = styled.div`
   p {
     font-size: 28px;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 40px;
+    background-color: white;
+    justify-content: center;
+    padding: 8px 0 8px 6px;
+    align-items: flex-start;
+  }
 `;
 const ItemContainer = styled.div`
   display: flex;
@@ -149,6 +151,15 @@ const ItemContainer = styled.div`
   background-color: white;
   margin-top: 40px;
   margin-bottom: 40px;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 90px;
+    display: flex;
+
+    padding: 0 4px 0 4px;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
 `;
 
 const TotalContainer = styled.div`
@@ -163,6 +174,15 @@ const TotalContainer = styled.div`
   height: 160px;
   background-color: white;
   flex-direction: column;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 5px 10px 5px;
+    padding: 10px 0 15px 0;
+  }
 `;
 const OrderEligibility = styled.div`
   display: flex;

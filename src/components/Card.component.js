@@ -4,16 +4,16 @@ import styled from "styled-components";
 const Card = (props) => {
   return (
     <Container>
-      <Info_div>
+      <InfoDiv>
         <p>{props.caption}</p>
-      </Info_div>
+      </InfoDiv>
 
-      <Image_div>
-        <img src={props.image} alt="Electronics image" />
-      </Image_div>
-      <Last_div>
+      <ImageDiv>
+        <img src={props.image} alt="Electronics" />
+      </ImageDiv>
+      <LastDiv>
         <p>See more</p>
-      </Last_div>
+      </LastDiv>
     </Container>
   );
 };
@@ -34,7 +34,7 @@ const Container = styled.div`
   }
 `;
 
-const Info_div = styled.div`
+const InfoDiv = styled.div`
   height: 20%;
 
   background-color: transparent;
@@ -52,7 +52,7 @@ const Info_div = styled.div`
     font-size: 22px;
   }
 `;
-const Last_div = styled.div`
+const LastDiv = styled.div`
   height: 8%;
   width: 100%;
   background-color: transparent;
@@ -69,7 +69,7 @@ const Last_div = styled.div`
     letter-spacing: normal;
   }
 `;
-const Image_div = styled.div`
+const ImageDiv = styled.div`
   height: 60%;
   background-color: transparent;
   padding-left: 20px;

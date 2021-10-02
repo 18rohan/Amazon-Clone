@@ -4,7 +4,7 @@ import styled from "styled-components";
 // import actions
 import { RemoveItem } from "../store/actions/CartActions.js";
 import { useDispatch } from "react-redux";
-import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+
 import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
 import { IncreaseItem, DecreaseItem } from "../store/actions/CartActions.js";
 
@@ -14,7 +14,7 @@ const CartItem = (props) => {
   return (
     <Container>
       <ImageContainer>
-        <img src={props.image} />
+        <img src={props.image} alt="product" />
       </ImageContainer>
 
       <Description>
@@ -94,6 +94,11 @@ const Container = styled.div`
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ImageContainer = styled.div`

@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useLayoutEffect } from "react";
+import styled from "styled-components";
 
 // Import Icons
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -9,20 +9,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 // Import packages
 import { Link } from "react-router-dom";
-import { db, auth, storage, provider } from "../firebase/firebaseConfig.js";
+import { db } from "../firebase/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutAPI } from "../store/actions/UserActions.js";
-import { AddToCart } from "../store/actions/CartActions.js";
-import { PRODUCTS } from "../Data/data.js";
-import {
-  AddItem,
-  SetCart,
-  AddToWishListAPI,
-} from "../store/actions/CartActions.js";
+
+import { SetCart } from "../store/actions/CartActions.js";
 
 // Import Fading animations
-import FadeIn from "../utils/Fadein.js";
+
 const Header = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.CurrentUser);
@@ -38,13 +33,10 @@ const Header = () => {
   }
   const AllCartItems = useSelector((state) => state.cart.cartItems);
   var CartNumber = 0;
-  AllCartItems.map((item) => {
-    CartNumber += item.quantity;
-  });
+  AllCartItems.map((item) => (CartNumber += item.quantity));
   console.log("ALL CART ITEMS: ", AllCartItems);
   // const BasketNumber = AllCartItems.length;
   const BasketNumber = CartNumber;
-
   const FetchUser = async () => {
     if (!currentUser) {
       return;
@@ -63,9 +55,9 @@ const Header = () => {
       }
     }
   };
-
   useLayoutEffect(() => {
     FetchUser();
+    /* eslint-disable */
   }, []);
   return (
     <ParentContainer>
@@ -98,10 +90,14 @@ const Header = () => {
 
           <SigninContainer>
             <Link to="/signin" style={{ textDecoration: "none" }}>
-              <p>
-                <span>Hello, {user}</span>
-                <div>Accounts & Lists ▾</div>
-              </p>
+              <div>
+                <span style={{ color: "white", fontSize: "13px" }}>
+                  Hello, {user}
+                </span>
+                <div>
+                  <p>Accounts & Lists ▾</p>
+                </div>
+              </div>
             </Link>
             <Dropdown>
               <HoverComponent>
@@ -151,7 +147,7 @@ const Header = () => {
                   <Options
                     style={{
                       borderLeft: "1px solid grey",
-                      paddingLeft: "15px;",
+                      paddingLeft: "15px",
                     }}
                   >
                     <p>Account</p>
@@ -204,30 +200,33 @@ const Header = () => {
         <MenuItem>
           <p>Mobiles</p>
         </MenuItem>
-        <MenuItem>
-          <p>Best Seller</p>
-        </MenuItem>
+
         <MenuItem>
           <p>Fashion</p>
         </MenuItem>
         <MenuItem>
+          <p>Groceries</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Entertainment</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Education</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Technology</p>
+        </MenuItem>
+        <MenuItem>
+          <p>Stationary</p>
+        </MenuItem>
+        <MenuItem>
           <p>Electronics</p>
         </MenuItem>
+
         <MenuItem>
-          <p>Customer Service</p>
+          <p>Prime</p>
         </MenuItem>
-        <MenuItem>
-          <p>Amazon Pay</p>
-        </MenuItem>
-        <MenuItem>
-          <p>Prime ▾</p>
-        </MenuItem>
-        <MenuItem>
-          <p>Today's Deal</p>
-        </MenuItem>
-        <MenuItem>
-          <p>New Releases</p>
-        </MenuItem>
+
         <MenuItem>
           <p>Computers</p>
         </MenuItem>
@@ -235,9 +234,7 @@ const Header = () => {
         <MenuItem>
           <p>Books</p>
         </MenuItem>
-        <MenuItem>
-          <p>Toys and Games</p>
-        </MenuItem>
+
         <MenuItem>
           <p>Coupon</p>
         </MenuItem>
@@ -256,7 +253,7 @@ const ParentContainer = styled.div`
   position: fixed;
   z-index: 400;
   @media (max-width: 768px) {
-    width: 102vw;
+    width: 100%;
     display: flex;
   }
 `;
@@ -282,10 +279,14 @@ const Menu = styled.div`
 
   @media (max-width: 768px) {
     position: fixed;
+    display: flex;
+
     left: 0;
     bottom: 0;
-    background: red;
+    background: #131921;
     width: 99%;
+    padding: 5px;
+    height: 40px;
   }
 `;
 
@@ -351,7 +352,11 @@ const MenuItem = styled.div`
     border: 1px solid white;
   }
   @media (max-width: 768px) {
-    width: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 300px;
     padding: 0;
     margin: 0;
     p {
@@ -385,7 +390,7 @@ const Right = styled.div`
   justify-content: flex-start;
   align-items: center;
   @media (max-width: 768px) {
-    width: 15%;
+    width: 40%;
     margin: 0px;
   }
 `;
@@ -454,7 +459,10 @@ const SelectAddress = styled.div`
     display: block;
   }
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    p {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -505,7 +513,10 @@ const SigninContainer = styled.div`
     transition-delay: 3s;
   }
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    p {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -528,7 +539,7 @@ const SearchBar = styled.div`
     }
   }
   @media (max-width: 768px) {
-    width: 100vh;
+    width: 50%;
     margin-left: 2px;
     margin-right: 2px;
     height: 35px;
@@ -548,7 +559,7 @@ const CategoryButton = styled.button`
   color: grey;
   font-size: 12px;
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
   }
 `;
 
@@ -586,7 +597,7 @@ const Returns = styled.div`
     font-weight: 400;
   }
   @media (max-width: 768px) {
-    display: none;
+    display: block;
   }
 `;
 

@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // Import Icons
 import { FaRupeeSign } from "react-icons/fa";
 // Import actions
-import {
-  AddToCart,
-  AddItem,
-  AddToCartAPI,
-} from "../store/actions/CartActions.js";
+import { AddToCartAPI } from "../store/actions/CartActions.js";
 import { AddToWishListAPI } from "../store/actions/WishListActions.js";
-import { AddItemToWishList } from "../store/actions/WishListActions.js";
+
 import { useDispatch } from "react-redux";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
@@ -31,7 +21,7 @@ const ProductCard = (props) => {
   return (
     <Container>
       <Imagediv>
-        <img src={props.image} alt="product image" />
+        <img src={props.image} alt="product" />
       </Imagediv>
       <HeadingDiv>
         <Link to={"/" + props.id} style={{ textDecoration: "none" }}>
@@ -46,11 +36,11 @@ const ProductCard = (props) => {
           <RupeeSign>
             <FaRupeeSign size={12} />
             {props.price}
-            <p>
-              <h2>
+            <div>
+              <h2 style={{ fontSize: "13px", color: "grey" }}>
                 <span>₹{props.price}</span> Save ₹3,000 (15%)
               </h2>
-            </p>
+            </div>
           </RupeeSign>
         </h1>
       </PriceDiv>
@@ -62,15 +52,13 @@ const ProductCard = (props) => {
       <AddtoCartContainer>
         <Button
           onClick={() => {
-            {
-              user ? (
-                dispatch(
-                  AddToCartAPI({ product: props.product, user_id: user.uid })
-                )
-              ) : (
-                <Redirect to="/signin" />
-              );
-            }
+            user ? (
+              dispatch(
+                AddToCartAPI({ product: props.product, user_id: user.uid })
+              )
+            ) : (
+              <Redirect to="/signin" />
+            );
           }}
         >
           Add to Cart
@@ -108,6 +96,18 @@ const Container = styled.div`
   z-index: 88;
   ${"" /* margin-left: 40px; */}
   ${"" /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */}
+  @media (max-width: 768px) {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    max-height: 300px;
+    min-height: 300px;
+    margin: 20px 20px 10px 20px;
+    padding: 10px 0 15px 0;
+  }
 `;
 
 const Imagediv = styled.div`

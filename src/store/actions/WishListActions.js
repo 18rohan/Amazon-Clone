@@ -1,12 +1,5 @@
-import {
-  doc,
-  setDoc,
-  collection,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore";
-import { db, auth, storage, provider } from "../../firebase/firebaseConfig";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 export const ADD_WISHLIST_ITEM = "ADD_WISHLIST_ITEM";
 export const DELETE_FROM_WISHLIST = "DELETE_FROM_WISHLIST";

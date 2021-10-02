@@ -81,11 +81,11 @@ const Container = styled.div`
   background-position: top center;
   @media (max-width: 768px) {
     width: 100%;
-    padding-left: 3px;
-    padding-right: 3px;
+    ${"" /* padding-left: 3px;
+    padding-right: 3px; */}
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
   }
 `;
 
@@ -96,6 +96,7 @@ const CarouselContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin-bottom: -450px;
+    padding-top: 48px;
   }
 `;
 const ProductRow1 = styled.div`
@@ -103,11 +104,12 @@ const ProductRow1 = styled.div`
   flex-direction: row;
   margin-bottom: 20px;
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
     overflow: scroll;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    box-shadow: 5px 5px 5px grey;
   }
 `;
 const ProductRow3 = styled.div`
@@ -120,6 +122,15 @@ const ProductRow3 = styled.div`
   width: 100%;
   flex-wrap: wrap;
   padding-bottom: 35px;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    ${"" /* padding: 12px 6px 12px 6px; */}
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 export default MainFeed;
