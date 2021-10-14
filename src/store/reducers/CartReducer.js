@@ -9,7 +9,7 @@ import {
 
 // Import Data Model
 
-import { addItemToCart, RemoveFromCart } from "../../utils/Cart.utils.js";
+import {  RemoveFromCart } from "../../utils/Cart.utils.js";
 
 const INITIAL_STATE = {
   cartItems: [],
