@@ -19,6 +19,10 @@ const SigninPage = (props) => {
         </Logo>
       </Link>
       <Signin />
+    <Info>
+      <p>Email: james007@mi.com</p>
+      <p>password: james12345</p>
+    </Info>
     </Container>
   );
 };
@@ -44,4 +48,11 @@ const Logo = styled.div`
     width: 160px;
   }
 `;
+const Info = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding-top:14px;
+  `;
 export default SigninPage;
