@@ -1,5 +1,5 @@
 # About the Project
-Link: https://thirsty-hamilton-ba4f3e.netlify.app/
+Link: https://thirsty-hamilton-ba4f3e.netlify.app
 A working Amazon-clone with the following features:
 ## User Authentication
 Users can authenticate using the following two methods
